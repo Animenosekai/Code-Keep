@@ -28,3 +28,13 @@ The webpage should reload with all the latest information.
 - To clear the saved pages (delete changes made on every site), click on the extension icon, click on 'List of saved pages'.
 
 - A new window should appear with all your modified/saved sites and you should be able to click on 'Clear everything' to clear every saved pages.
+
+
+
+
+### Known issues
+
+##### YouTube
+YouTube doesn't seem to work well/seems to break when saved (there is no search bar for example).
+
+> I think that this issue comes with how YouTube is made: a dynamic website which reloads its content multiple times when you're browsing it.
