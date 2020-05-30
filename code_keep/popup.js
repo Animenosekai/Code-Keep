@@ -52,5 +52,6 @@ function delete_from_database(){
 }
 
 function openList(){
-    chrome.tabs.create({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
+    var _ = chrome.runtime.openOptionsPage()
+    //chrome.tabs.create({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
 }
