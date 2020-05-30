@@ -3,6 +3,7 @@ const setDOMInfo = info => {
     document.getElementById('total').textContent = info.total;
     var saveBtn = document.getElementById('save_to_database');
     var deleteBtn = document.getElementById('delete_from_database');
+    var openListBtn = document.getElementById('open_list')
     console.log('The page is already saved: ' + info.already_saved)
     if (info.already_saved == false){
         deleteBtn.style.display = 'none'
@@ -15,7 +16,10 @@ const setDOMInfo = info => {
     });
     deleteBtn.addEventListener('click', function() {
         delete_from_database();
-    });  
+    });
+    openListBtn.addEventListener('click', function(){
+        openList()
+    })
 };
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -45,4 +49,8 @@ function delete_from_database(){
         chrome.tabs.sendMessage(tabs[0].id, {request: "delete"}, function(response) {
         });
       });
+}
+
+function openList(){
+    chrome.tabs.create({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
 }
