@@ -3,8 +3,11 @@ const setDOMInfo = info => {
     document.getElementById('total').textContent = info.total;
     var saveBtn = document.getElementById('save_to_database');
     var deleteBtn = document.getElementById('delete_from_database');
+    console.log('The page is already saved: ' + info.already_saved)
     if (info.already_saved == false){
-        saveBtn.style.display = 'none'
+        deleteBtn.style.display = 'none'
+    }else{
+        deleteBtn.style.display = 'block'
     }
     saveBtn.addEventListener('click', function() {
         save();
@@ -13,20 +16,21 @@ const setDOMInfo = info => {
     deleteBtn.addEventListener('click', function() {
         delete_from_database();
     });  
-  };
-  
-  window.addEventListener('DOMContentLoaded', () => {
-    chrome.tabs.query({
-      active: true,
-      currentWindow: true
-    }, tabs => {
-      chrome.tabs.sendMessage(
-          tabs[0].id,
-          {from: 'popup', subject: 'DOMInfo'},
-          setDOMInfo);
-    });
+};
 
+window.addEventListener('DOMContentLoaded', () => {
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, tabs => {
+    chrome.tabs.sendMessage(
+        tabs[0].id,
+        {from: 'popup', subject: 'DOMInfo'},
+        setDOMInfo);
   });
+
+});
+
 
 function save(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
